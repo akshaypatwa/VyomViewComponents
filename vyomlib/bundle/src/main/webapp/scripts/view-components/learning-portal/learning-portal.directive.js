@@ -3,7 +3,7 @@
     angular.module('com.vyom.vyomlib.view-components.learning-portal')
         .directive('comVyomVyomlibLearningPortal',
 
-            function (rxRecordInstanceDataPageResource, rxRecordInstanceResource, $document, $window, $timeout, rxCurrentUser, rxNotificationMessage, rxGUID, $sce, rxViewComponentEventManager, rxRecordInstanceAttachmentResource, rxString, rxNamedListDataPageResource, rxAssociationInstanceDataPageResource) {
+            function (rxRecordInstanceDataPageResource, rxRecordInstanceResource, $document, $window, $timeout, rxCurrentUser, rxNotificationMessage, rxGUID, $sce, rxViewComponentEventManager, rxRecordInstanceAttachmentResource, rxString, rxNamedListDataPageResource, rxRecordDefinitionResource) {
                 return {
                     restrict: 'E',
                     templateUrl: 'scripts/view-components/learning-portal/com-vyom-vyomlib-learning-portal.directive.html',
@@ -25,12 +25,11 @@
                             $scope.cardList = [];
                             $scope.RecordDefinition = _config.recordDefinitionFullName;
                             $scope.courseName = _config.courseName;
-                            $scope.regionName = _config.regionName;
                             $scope.supplierName = _config.supplierName;
-                            $scope.deliveryMethod = _config.deliveryMethod;
                             $scope.supplierRating = _config.supplierRating;
                             $scope.courseRating = _config.courseRating;
-                            $scope.cost = _config.cost;
+                            $scope.costPerHoursSuffix = _config.costPerHoursSuffix ? _config.costPerHoursSuffix : "";
+                            $scope.totalCostPerHoursSuffix = _config.totalCostPerHoursSuffix ? _config.totalCostPerHoursSuffix : "";
                             $scope.FilterExp = _config.FilterExp ? _config.FilterExp : "";
 
                             //card layout
@@ -67,6 +66,8 @@
 
                             $scope.getCardList();
                             $scope.mydata = [];
+                            $scope.getCardListResource();
+                            $scope.mydataResource = [];
 
 
 
@@ -92,9 +93,11 @@
                             $scope.getDropDownData("deliveryData", $scope.thirdDropDownRecordDefinition, $scope.thirdDropDownDisplayField);
                             $scope.fourthDropDownRecordDefinition = _config.fourthDropDownRecordDefinition;
                             $scope.fourthDropDownDisplayField = _config.fourthDropDownDisplayField;
+                            $scope.fourthDropDownStoredField = _config.fourthDropDownStoredField;
                             $scope.getDropDownData("supplierRating", $scope.fourthDropDownRecordDefinition, $scope.fourthDropDownDisplayField);
                             $scope.fifthDropDownRecordDefinition = _config.fifthDropDownRecordDefinition;
                             $scope.fifthDropDownDisplayField = _config.fifthDropDownDisplayField;
+                            $scope.fifthDropDownStoredField = _config.fifthDropDownStoredField;
                             $scope.getDropDownData("courseRating", $scope.fifthDropDownRecordDefinition, $scope.fifthDropDownDisplayField);
                             //sorting
                             $scope.sixthDropDownRecordDefinition = _config.sixthDropDownRecordDefinition;
@@ -141,9 +144,21 @@
 
                         }
 
+                        $scope.getCardListResource = function () {
+                            rxRecordDefinitionResource.get($scope.RecordDefinition).then(function (recordDefinitionResource) {
+                                $scope.mydataResource = recordDefinitionResource.fieldDefinitions;
 
+                            });
+                        }
 
+                        $scope.getFieldIdFromName = function (fieldlabel) {
 
+                            var fieldObject = _.find($scope.mydataResource, {
+                                name: fieldlabel
+                            });
+
+                            return fieldObject ? fieldObject.id : "";
+                        }
 
 
 
@@ -187,6 +202,7 @@
                             var courseSorting = "";
                             courseSorting = $scope.selectedValue6 ? $scope.selectedValue6 : $scope.cardSorting;
 
+
                             if (searchtype == 'search') {
                                 if (searchtext) {
                                     cardQueryExpression2 += "'" + $scope.courseName + "' LIKE \"%" + searchtext + '%"';
@@ -195,11 +211,10 @@
                                     $scope.getCardList();
                                 }
                             } else {
-                                cardQueryExpression += $scope.selectedValue1 ? "'" + $scope.supplierName + "'=\"" + $scope.selectedValue1 + '"AND' : "";
-                                cardQueryExpression += $scope.selectedValue2 ? "'" + $scope.regionName + "'=\"" + $scope.selectedValue2 + '"AND' : "";
-                                cardQueryExpression += $scope.selectedValue3 ? "'" + $scope.deliveryMethod + "'=\"" + $scope.selectedValue3 + '"AND' : "";
-                                cardQueryExpression += $scope.selectedValue4 ? "'" + $scope.supplierRating + "'=\"" + $scope.selectedValue4 + '"AND' : "";
-                                cardQueryExpression += $scope.selectedValue5 ? "'" + $scope.courseRating + "'=\"" + $scope.selectedValue5 + '"AND' : "";
+                                cardQueryExpression += $scope.selectedValue1 ? "'" + $scope.supplierName + "'=\"" + $scope.selectedValue1 + '" AND' : "";
+                                cardQueryExpression += $scope.selectedValue2 && $scope.selectedValue3 ? "'" + $scope.selectedValue2 + "-" + $scope.selectedValue3 + "" + $scope.totalCostPerHoursSuffix + "' != \"\" AND" : "";
+                                cardQueryExpression += $scope.selectedValue4 ? "'" + $scope.supplierRating + "'" + $scope.selectedValue4 + ' AND' : "";
+                                cardQueryExpression += $scope.selectedValue5 ? "'" + $scope.courseRating + "'" + $scope.selectedValue5 + ' AND' : "";
 
                                 cardQueryExpression2 = cardQueryExpression.substring(0, cardQueryExpression.lastIndexOf("AND"));
 

@@ -59,13 +59,13 @@
          
         <div class="d-flex flex-row" style="justify-content: center;">
             <div class="p-2 bd-highlight">
-                Supplier Name: <select ng-model="selectedValue1" ng-change="filterCurrentCategoryOrSearchText('dropdown','')" style="margin-left: 10px;width:auto;margin-right: 10px;">
+                Supplier Name: <select ng-model="selectedValue1" ng-change="filterCurrentCategoryOrSearchText('dropdown','');selectedValue4='';" ng-init="" style="margin-left: 10px;width:auto;margin-right: 10px;">
                     <option value="" selected>Select Supplier</option>
                     <option value="{{d1[firstDropDownDisplayField]}}" ng-repeat="d1 in dropDownDataSet.supplierData">{{d1[firstDropDownDisplayField]}}</option>
                 </select>
 
-                Region Name: <select ng-model="selectedValue2" ng-change="filterCurrentCategoryOrSearchText('dropdown','')" style="margin-left: 10px;width: auto;margin-right: 10px;">
-                    <option value="" selected>Select Region</option>
+                Geography : <select ng-model="selectedValue2" ng-change="filterCurrentCategoryOrSearchText('dropdown','')" style="margin-left: 10px;width: auto;margin-right: 10px;">
+                    <option value="" selected>Select Geography</option>
                     <option value="{{d2[secondDropDownDisplayField]}}" ng-repeat="d2 in dropDownDataSet.regionData">{{d2[secondDropDownDisplayField]}}</option>
                 </select>
 
@@ -74,14 +74,14 @@
                     <option value="{{d3[thirdDropDownDisplayField]}}" ng-repeat="d3 in dropDownDataSet.deliveryData">{{d3[thirdDropDownDisplayField]}}</option>
                 </select>
 
-                Supplier Rating: <select ng-model="selectedValue4" ng-change="filterCurrentCategoryOrSearchText('dropdown','')" style="margin-left: 10px;width: auto;margin-right: 10px;">
+                Supplier Rating: <select ng-model="selectedValue4" ng-disabled="selectedValue1" ng-change="filterCurrentCategoryOrSearchText('dropdown','')" style="margin-left: 10px;width: auto;margin-right: 10px;">
                     <option value="" selected>Select Supplier Rating</option>
-                    <option value="{{d4[fourthDropDownDisplayField]}}" ng-repeat="d4 in dropDownDataSet.supplierRating">{{d4[fourthDropDownDisplayField]}}</option>
+                    <option value="{{d4[fourthDropDownStoredField]}}" ng-repeat="d4 in dropDownDataSet.supplierRating">{{d4[fourthDropDownDisplayField]}}</option>
                 </select>
 
                 Course Rating: <select ng-model="selectedValue5" ng-change="filterCurrentCategoryOrSearchText('dropdown','')" style="margin-left: 10px;width: auto;margin-right: 10px;">
                     <option value="" selected>Select Course Rating</option>
-                    <option value="{{d5[fifthDropDownDisplayField]}}" ng-repeat="d5 in dropDownDataSet.courseRating">{{d5[fifthDropDownDisplayField]}}</option>
+                    <option value="{{d5[fifthDropDownStoredField]}}" ng-repeat="d5 in dropDownDataSet.courseRating">{{d5[fifthDropDownDisplayField]}}</option>
                 </select>
 
                 Sort By: <select ng-model="selectedValue6" ng-change="filterCurrentCategoryOrSearchText('dropdown','')" style="margin-left: 10px;width: auto;margin-right: 10px;">
@@ -119,8 +119,8 @@
 
                             </div>
 
-                            <p class="card-category" style="" ng-if="x[cost]">
-                                $ {{x[cost]}}
+                            <p class="card-category" style="" ng-if="x[getFieldIdFromName(selectedValue2+'-'+selectedValue3+''+totalCostPerHoursSuffix)]">
+                                $ {{x[getFieldIdFromName(selectedValue2+'-'+selectedValue3+''+totalCostPerHoursSuffix)]}}
                             </p>
 
 

@@ -16,19 +16,20 @@
 
 
 
-
+            var defaultBannerHeight = _.find(componentDescriptor.propertiesByName, {
+                name: 'BannerHeight'
+            }).defaultValue;
 
 
             return {
 
                 recordDefinitionFullName: componentDefinition.propertiesByName.recordDefinitionFullName,
                 courseName: componentDefinition.propertiesByName.courseName,
-                regionName: componentDefinition.propertiesByName.regionName,
                 supplierName: componentDefinition.propertiesByName.supplierName,
-                deliveryMethod: componentDefinition.propertiesByName.deliveryMethod,
                 supplierRating: componentDefinition.propertiesByName.supplierRating,
                 courseRating: componentDefinition.propertiesByName.courseRating,
-                cost: componentDefinition.propertiesByName.cost,
+                costPerHoursSuffix: componentDefinition.propertiesByName.costPerHoursSuffix,
+                totalCostPerHoursSuffix: componentDefinition.propertiesByName.totalCostPerHoursSuffix,
 
                 cardActionGuid: componentDefinition.propertiesByName.cardActionGuid,
                 perRowCardLength: componentDefinition.propertiesByName.perRowCardLength,
@@ -55,8 +56,10 @@
                 thirdDropDownDisplayField: componentDefinition.propertiesByName.thirdDropDownDisplayField,
                 fourthDropDownRecordDefinition: componentDefinition.propertiesByName.fourthDropDownRecordDefinition,
                 fourthDropDownDisplayField: componentDefinition.propertiesByName.fourthDropDownDisplayField,
+                fourthDropDownStoredField: componentDefinition.propertiesByName.fourthDropDownStoredField,
                 fifthDropDownRecordDefinition: componentDefinition.propertiesByName.fifthDropDownRecordDefinition,
                 fifthDropDownDisplayField: componentDefinition.propertiesByName.fifthDropDownDisplayField,
+                fifthDropDownStoredField: componentDefinition.propertiesByName.fifthDropDownStoredField,
                 sixthDropDownRecordDefinition: componentDefinition.propertiesByName.sixthDropDownRecordDefinition,
                 sixthDropDownDisplayField: componentDefinition.propertiesByName.sixthDropDownDisplayField,
                 sixthDropDownStoredField: componentDefinition.propertiesByName.sixthDropDownStoredField,
@@ -83,47 +86,51 @@
                             group: 'Card',
                             index: 2
                         },
-                        regionName: {
-                            label: 'region',
-                            type: 'com-vyom-vyomlib-inspector-learning-portal-fields',
-                            group: 'Card',
-                            index: 3
-                        },
+
                         supplierName: {
                             label: 'Supplier Name',
                             type: 'com-vyom-vyomlib-inspector-learning-portal-fields',
                             group: 'Card',
-                            index: 4
+                            index: 3
                         },
-                        deliveryMethod: {
-                            label: 'Delivery Method',
-                            type: 'com-vyom-vyomlib-inspector-learning-portal-fields',
-                            group: 'Card',
-                            index: 5
-                        },
+
                         supplierRating: {
                             label: 'Supplier Rating',
                             type: 'com-vyom-vyomlib-inspector-learning-portal-fields',
                             group: 'Card',
-                            index: 6
+                            index: 4
                         },
                         courseRating: {
                             label: 'Course Rating',
                             type: 'com-vyom-vyomlib-inspector-learning-portal-fields',
                             group: 'Card',
-                            index: 7
+                            index: 5
                         },
-                        cost: {
-                            label: 'Cost',
-                            type: 'com-vyom-vyomlib-inspector-learning-portal-fields',
+                        costPerHoursSuffix: {
+                            label: 'Cost Per Hours Suffix',
+                            type: 'rx-inspector-expression-node-field',
+                            tooltip: {
+                                text: "This suffix would be use for generating field name/label, After selecting Geography and Delivery Method Dropdown.(eg.<<MANA-ILT Open-Us Dollers>>...'-Us Dollers' would be suffix)",
+                                placement: "left"
+                            },
                             group: 'Card',
-                            index: 8
+                            index: 6
+                        },
+                        totalCostPerHoursSuffix: {
+                            label: 'Total Cost Per Hours Suffix',
+                            type: 'rx-inspector-expression-node-field',
+                            tooltip: {
+                                text: "This suffix would be use for generating column name/label, After selecting Geography and Delivery Method Dropdown.(eg.<<MANA-ILT Open-Total Cost Per Hours>>...'-Total Cost Per Hours' would be suffix)",
+                                placement: "left"
+                            },
+                            group: 'Card',
+                            index: 7
                         },
                         FilterExp: {
                             label: 'Filter',
                             type: 'rx-inspector-expression-node-field',
                             group: 'Card',
-                            index: 9
+                            index: 8
                         },
 
 
@@ -273,36 +280,47 @@
                             index: 6
                         },
                         fourthDropDownRecordDefinition: {
-                            label: 'fourthDropDownRecordDefinition',
+                            label: 'Supplier Rating Record Definition',
                             type: 'rx-inspector-expression-node-field',
                             group: 'DropDown',
                             index: 7
                         },
                         fourthDropDownDisplayField: {
-                            label: 'fourthDropDownDisplayField',
+                            label: 'Supplier Rating DisplayField',
                             type: 'rx-inspector-expression-node-field',
                             group: 'DropDown',
                             index: 8
                         },
-
-                        fifthDropDownRecordDefinition: {
-                            label: 'fifthDropDownRecordDefinition',
+                        fourthDropDownStoredField: {
+                            label: 'Supplier Rating StoredField',
                             type: 'rx-inspector-expression-node-field',
                             group: 'DropDown',
                             index: 9
                         },
-
-                        fifthDropDownDisplayField: {
-                            label: 'fifthDropDownDisplayField',
+                        fifthDropDownRecordDefinition: {
+                            label: 'Course Rating Record Definition',
                             type: 'rx-inspector-expression-node-field',
                             group: 'DropDown',
                             index: 10
+                        },
+
+                        fifthDropDownDisplayField: {
+                            label: 'Course Rating DisplayField',
+                            type: 'rx-inspector-expression-node-field',
+                            group: 'DropDown',
+                            index: 11
+                        },
+                        fifthDropDownStoredField: {
+                            label: 'Course Rating StoredField',
+                            type: 'rx-inspector-expression-node-field',
+                            group: 'DropDown',
+                            index: 12
                         },
                         sixthDropDownRecordDefinition: {
                             label: 'Sort By RecordDefinition',
                             type: 'rx-inspector-expression-node-field',
                             group: 'DropDown',
-                            index: 11
+                            index: 13
                         },
 
                         sixthDropDownDisplayField: {
@@ -313,7 +331,7 @@
                                 placement: "left"
                             },
                             group: 'DropDown',
-                            index: 12
+                            index: 13
                         },
                         sixthDropDownStoredField: {
                             label: 'Sort By Stored Value Field',
@@ -323,7 +341,7 @@
                                 placement: "left"
                             },
                             group: 'DropDown',
-                            index: 13
+                            index: 14
                         },
                     }
                 },

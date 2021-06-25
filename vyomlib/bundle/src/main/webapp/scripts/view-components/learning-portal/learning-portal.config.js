@@ -25,24 +25,14 @@
 
                     },
 
-                        {
 
-                            name: 'regionName',
-                            isConfig: true,
-
-                    },
                         {
 
                             name: 'supplierName',
                             isConfig: true,
 
                     },
-                        {
 
-                            name: 'deliveryMethod',
-                            isConfig: true,
-
-                    },
                         {
 
                             name: 'supplierRating',
@@ -57,7 +47,15 @@
                     },
                         {
 
-                            name: 'cost',
+                            name: 'costPerHoursSuffix',
+                            enableExpressionEvaluation: true,
+                            isConfig: true,
+
+                    },
+                        {
+
+                            name: 'totalCostPerHoursSuffix',
+                            enableExpressionEvaluation: true,
                             isConfig: true,
 
                     },
@@ -122,12 +120,14 @@
                         {
 
                             name: 'greetings',
+                            enableExpressionEvaluation: true,
                             isConfig: true,
 
                     },
                         {
 
                             name: 'searchPlaceholder',
+                            enableExpressionEvaluation: true,
                             isConfig: true,
 
                     },
@@ -180,12 +180,14 @@
                         {
 
                             name: 'firstDropDownDisplayField',
+                            enableExpressionEvaluation: true,
                             isConfig: true
 
                     },
                         {
 
                             name: 'firstDropDownRecordDefinition',
+                            enableExpressionEvaluation: true,
                             isConfig: true
 
                     },
@@ -193,66 +195,94 @@
                         {
 
                             name: 'secondDropDownDisplayField',
+                            enableExpressionEvaluation: true,
                             isConfig: true
 
                     },
                         {
 
                             name: 'secondDropDownRecordDefinition',
+                            enableExpressionEvaluation: true,
                             isConfig: true
 
                     },
                         {
 
                             name: 'thirdDropDownDisplayField',
+                            enableExpressionEvaluation: true,
                             isConfig: true
 
                     },
                         {
 
                             name: 'thirdDropDownRecordDefinition',
+                            enableExpressionEvaluation: true,
+                            isConfig: true
+
+                    },
+
+                        {
+
+                            name: 'fourthDropDownRecordDefinition',
+                            enableExpressionEvaluation: true,
                             isConfig: true
 
                     },
                         {
 
                             name: 'fourthDropDownDisplayField',
+                            enableExpressionEvaluation: true,
                             isConfig: true
 
                     },
                         {
 
-                            name: 'fourthDropDownRecordDefinition',
+                            name: 'fourthDropDownStoredField',
+                            enableExpressionEvaluation: true,
+                            isConfig: true
+
+                    },
+
+                        {
+
+                            name: 'fifthDropDownRecordDefinition',
+                            enableExpressionEvaluation: true,
                             isConfig: true
 
                     },
                         {
 
                             name: 'fifthDropDownDisplayField',
+                            enableExpressionEvaluation: true,
                             isConfig: true
 
                     },
                         {
 
-                            name: 'fifthDropDownRecordDefinition',
+                            name: 'fifthDropDownStoredField',
+                            enableExpressionEvaluation: true,
                             isConfig: true
 
                     },
+
                         {
 
                             name: 'sixthDropDownRecordDefinition',
+                            enableExpressionEvaluation: true,
                             isConfig: true
 
                     },
                         {
 
                             name: 'sixthDropDownDisplayField',
+                            enableExpressionEvaluation: true,
                             isConfig: true
 
                     },
                         {
 
                             name: 'sixthDropDownStoredField',
+                            enableExpressionEvaluation: true,
                             isConfig: true
 
                     },

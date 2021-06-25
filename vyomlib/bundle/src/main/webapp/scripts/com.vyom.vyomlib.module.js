@@ -33,6 +33,7 @@
         'com.vyom.vyomlib.view-components.search-bar',
         'com.vyom.vyomlib.view-components.embedded-chatbot',
         'com.vyom.vyomlib.view-components.service-health-dashboard',
+        'com.vyom.vyomlib.view-components.service-health',
         
         //26
         
